@@ -98,4 +98,17 @@
       return false;
     }
   });
+  // 图片查看器组件 
+  var imgModal = $('.img-modal-wrapper')
+  $('.post-content').on('click', function (e) {
+    if (e && e.target && e.target.tagName === 'IMG') {
+      if (e && e.target && e.target.src && imgModal.find('img').length) {
+        imgModal.addClass('active')
+        imgModal.find('img')[0].src = e.target.src
+      }
+    }
+  })
+  imgModal.on('click', function () {
+    imgModal.removeClass('active')
+  })
 })(jQuery);

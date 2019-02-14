@@ -10,7 +10,9 @@ body {
 	width: 100%;
 	margin: 0 auto 30px auto;
 	background-color: #fff;
-
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 p {
 	line-height: 1.9em;
@@ -128,12 +130,12 @@ a:hover, a:active {
 .content {
 	height: auto;
 	float: right;
-	width: 60%;
+	width: 70%;
 	margin-top:60px;
 }
 
 .page-top{
-	width: 60%;
+	width: 70%;
 	position: fixed;
 	right: 0;
 	z-index: 3;
@@ -193,7 +195,7 @@ a:hover, a:active {
 
 }
 .sidebar {
-	width: 40%;
+	width: 30%;
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: #fff;
@@ -247,7 +249,8 @@ a:hover, a:active {
 		text-align: center;
 
 		i{
-			margin-right: 3px;
+      margin-right: 3px;
+      font-size: 18px;
 		}
 
 		li {
@@ -317,7 +320,11 @@ a:hover, a:active {
 		}
 		a:hover{
 			color: #2F69B3;
-		}
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: #5F5F5F;
+      font-weight: normal;
+    }
 		h3{
 			color: #5F5F5F;
 			font-size:22px;
@@ -326,7 +333,18 @@ a:hover, a:active {
 		h4 {
 			color: #5F5F5F;
 			font-size:16px;
-		}
+    }
+    img {
+      cursor: -webkit-zoom-in;
+      border-radius: 3px;
+      transition: all .3s;
+    }
+    img:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      position: relative;
+    }
 	}
 
 	.post-footer {
@@ -770,7 +788,7 @@ a.btn {
 		line-height: 1.6;
 	}
 	.content{
-		margin-top: 420px;
+		margin-top: 390px;
 		width: 100%;
 		z-index: 2;
 		position: absolute;
@@ -779,7 +797,35 @@ a.btn {
 		display: none;
 	}
 	.share{
-		display: grid;
+		// display: grid;
 	}
 
+}
+// 图片查看器
+.img-modal-wrapper.active {
+  opacity: 1;
+  top: 0;
+}
+.img-modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  opacity: 0;
+  transition: all 1000ms ease-in-out;
+  -webkit-transition: all 1000ms ease-in-out;
+  top: 100%;
+  cursor: -webkit-zoom-out;
+  position: fixed;
+  left: 0;
+  right: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -moz-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -moz-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 }
