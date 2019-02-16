@@ -18,6 +18,7 @@ $(document).ready(function() {
   }
 
   function initAffix() {
+    return
     var headerOffset = getHeaderOffset();
     var footerOffset = getFooterOffset();
     var sidebarHeight = $('#sidebar').height() + NexT.utils.getSidebarb2tHeight();

@@ -85,25 +85,27 @@ $(document).ready(function() {
     toggleEl        : $('.sidebar-toggle'),
     dimmerEl        : $('#sidebar-dimmer'),
     sidebarEl       : $('.sidebar'),
-    isSidebarVisible: false,
+    isSidebarVisible: true,
+    // isSidebarVisible: false,
     init            : function() {
+      sidebarToggleLines.init()
       this.toggleEl.on('click', this.clickHandler.bind(this));
       this.dimmerEl.on('click', this.clickHandler.bind(this));
-      this.toggleEl.on('mouseenter', this.mouseEnterHandler.bind(this));
-      this.toggleEl.on('mouseleave', this.mouseLeaveHandler.bind(this));
-      this.sidebarEl.on('touchstart', this.touchstartHandler.bind(this));
-      this.sidebarEl.on('touchend', this.touchendHandler.bind(this));
-      this.sidebarEl.on('touchmove', function(e) { e.preventDefault(); });
+      // this.toggleEl.on('mouseenter', this.mouseEnterHandler.bind(this));
+      // this.toggleEl.on('mouseleave', this.mouseLeaveHandler.bind(this));
+      // this.sidebarEl.on('touchstart', this.touchstartHandler.bind(this));
+      // this.sidebarEl.on('touchend', this.touchendHandler.bind(this));
+      // this.sidebarEl.on('touchmove', function(e) { e.preventDefault(); });
 
-      $(document)
-        .on('sidebar.isShowing', function() {
-          NexT.utils.isDesktop() && $('body').velocity('stop').velocity(
-            {paddingRight: SIDEBAR_WIDTH},
-            SIDEBAR_DISPLAY_DURATION
-          );
-        })
-        .on('sidebar.isHiding', function() {
-        });
+      // $(document)
+      //   .on('sidebar.isShowing', function() {
+      //     NexT.utils.isDesktop() && $('body').velocity('stop').velocity(
+      //       {paddingLeft: SIDEBAR_WIDTH},
+      //       SIDEBAR_DISPLAY_DURATION
+      //     );
+      //   })
+      //   .on('sidebar.isHiding', function() {
+      //   });
     },
     clickHandler: function() {
       this.isSidebarVisible ? this.hideSidebar() : this.showSidebar();
@@ -135,51 +137,66 @@ $(document).ready(function() {
     showSidebar: function() {
       var self = this;
 
-      sidebarToggleLines.close();
-
+      // sidebarToggleLines.close();
+      
+      self.sidebarEl.find('.sidebar-inner').css('display', 'block');
       this.sidebarEl.velocity('stop').velocity({
         width: SIDEBAR_WIDTH
       }, {
         display : 'block',
         duration: SIDEBAR_DISPLAY_DURATION,
         begin   : function() {
-          $('.sidebar .motion-element').velocity(
-            'transition.slideRightIn',
-            {
-              stagger : 50,
-              drag    : true,
-              complete: function() {
-                self.sidebarEl.trigger('sidebar.motion.complete');
-              }
-            }
-          );
+          // $('.sidebar .motion-element').velocity(
+          //   'transition.slideRightIn',
+          //   {
+          //     stagger : 50,
+          //     drag    : true,
+          //     complete: function() {
+          //       self.sidebarEl.trigger('sidebar.motion.complete');
+          //     }
+          //   }
+          // );
+          NexT.utils.isDesktop() && $('#main').velocity('stop').velocity({'margin-left': '30%'});
+          NexT.utils.isDesktop() && $('#header').velocity('stop').velocity({width: '70%'});
         },
         complete: function() {
           self.sidebarEl.addClass('sidebar-active');
           self.sidebarEl.trigger('sidebar.didShow');
         }
       });
-
+      
       this.sidebarEl.trigger('sidebar.isShowing');
     },
     hideSidebar: function() {
-      NexT.utils.isDesktop() && $('body').velocity('stop').velocity({paddingRight: 0});
-      this.sidebarEl.find('.motion-element').velocity('stop').css('display', 'none');
-      this.sidebarEl.velocity('stop').velocity({width: 0}, {display: 'none'});
+      var self = this;
+      // NexT.utils.isDesktop() && $('body').velocity('stop').velocity({paddingLeft: 0});
 
-      sidebarToggleLines.init();
+      this.sidebarEl.velocity('stop').velocity({
+        width: 0
+      }, {
+        display : 'none',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        begin   : function() {
+          NexT.utils.isDesktop() && $('#main').velocity('stop').velocity({'margin-left': '0'});
+          NexT.utils.isDesktop() && $('#header').velocity('stop').velocity({width: '100%'});
+        },
+        complete: function() {
+          self.sidebarEl.find('.sidebar-inner').css('display', 'none');
+          self.sidebarEl.removeClass('sidebar-active');
+          self.sidebarEl.trigger('sidebar.isHiding');
+        }
+      });
+      // sidebarToggleLines.init();
 
-      this.sidebarEl.removeClass('sidebar-active');
-      this.sidebarEl.trigger('sidebar.isHiding');
 
       // Prevent adding TOC to Overview if Overview was selected when close & open sidebar.
-      if ($('.post-toc-wrap')) {
-        if ($('.site-overview-wrap').css('display') === 'block') {
-          $('.post-toc-wrap').removeClass('motion-element');
-        } else {
-          $('.post-toc-wrap').addClass('motion-element');
-        }
-      }
+      // if ($('.post-toc-wrap')) {
+      //   if ($('.site-overview-wrap').css('display') === 'block') {
+      //     $('.post-toc-wrap').removeClass('motion-element');
+      //   } else {
+      //     $('.post-toc-wrap').addClass('motion-element');
+      //   }
+      // }
     }
   };
   sidebarToggleMotion.init();

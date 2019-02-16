@@ -236,7 +236,7 @@ NexT.utils = NexT.$u = {
     if (!this.isDesktop() || this.isPisces() || this.isGemini()) {
       return;
     }
-    $('.sidebar-toggle').trigger('click');
+    // $('.sidebar-toggle').trigger('click');
   },
 
   isMuse: function() {
