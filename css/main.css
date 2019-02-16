@@ -1518,6 +1518,9 @@ pre .javascript .function {
 .page-home .posts-expand .post {
   padding-bottom: 10px;
 }
+.posts-expand .post-title-link {
+  font-weight: bold;
+}
 .page-home .post-type-quote .post-header,
 .page-post-detail .post-type-quote .post-header,
 .page-home .post-type-quote .post-tags,
@@ -1528,7 +1531,7 @@ pre .javascript .function {
   overflow-wrap: break-word;
   word-wrap: break-word;
   text-align: center;
-  font-weight: 400;
+  font-weight: bold;
 }
 .posts-expand .post-title-link {
   display: inline-block;
@@ -1769,6 +1772,8 @@ pre .javascript .function {
   padding-top: 240px;
   color: #999;
   text-align: center;
+  height: 100%;
+  box-sizing: border-box;
 }
 .site-overview::-webkit-scrollbar {
   width: 10px;
@@ -2841,7 +2846,7 @@ hr {
 .posts-expand .post-title {
   position: relative;
   font-size: 26px;
-  font-weight: 400;
+  font-weight: bold;
 }
 @media (max-width: 767px) {
   .posts-expand .post-title {
@@ -2983,7 +2988,9 @@ hr {
   padding: 5px 0;
   color: #666;
   margin-left: 0;
-  border-top: 1px solid #f2f2f2;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .footer {
@@ -2996,13 +3003,19 @@ hr {
     margin-left: auto;
   }
 }
-.footer-inner {
-  margin-left: 30px;
-  text-align: left;
+.container .footer-inner {
+  text-align: center;
   width: 100%;
+  color: #bbb;
+}
+.container .footer-inner a {
+  color: #bbb;
+}
+.container .footer-inner a:hover {
+  color: #555;
 }
 @media (max-width: 767px) {
-  .footer-inner {
+  .container .footer-inner {
     width: auto;
     text-align: center;
   }
