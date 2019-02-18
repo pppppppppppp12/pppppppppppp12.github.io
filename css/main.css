@@ -1515,9 +1515,6 @@ pre .javascript .function {
   margin-top: -5px;
   margin-bottom: 10px;
 }
-.page-home .posts-expand .post {
-  padding-bottom: 10px;
-}
 .posts-expand .post-title-link {
   font-weight: bold;
 }
@@ -1687,10 +1684,9 @@ pre .javascript .function {
 }
 .posts-expand .post-eof {
   display: block;
-  margin: 80px auto 60px;
-  width: 8%;
-  height: 1px;
-  background: #ccc;
+  margin: 30px auto 0px;
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
   text-align: center;
 }
 .post:last-child .post-eof.post-eof.post-eof {
@@ -1745,7 +1741,7 @@ pre .javascript .function {
   height: 100%;
   background-color: #fff;
   transition: 0.8s;
-  z-index: 4;
+  z-index: 2;
   border-right: 1px solid #f2f2f2;
 }
 .sidebar a,
@@ -2203,6 +2199,7 @@ pre .javascript .function {
   color: #333;
   z-index: 9999;
   border-radius: 5px;
+  line-height: 40px;
 }
 @media (max-width: 767px) {
   .local-search-popup {
@@ -2583,13 +2580,11 @@ hr {
   margin-top: 4px;
 }
 .header {
-  background: #f5f5f5;
   width: 70%;
   position: fixed;
   right: 0;
   top: 0;
   z-index: 3;
-  background-color: #fff;
   height: 60px;
   border-bottom: 1px solid #f2f2f2;
   box-sizing: border-box;
@@ -2695,9 +2690,6 @@ hr {
 .site-subtitle {
   display: none;
 }
-.site-nav {
-  background-color: #fff;
-}
 .site-nav ul {
   margin-top: 0;
   text-align: left;
@@ -2706,11 +2698,13 @@ hr {
 @media (min-width: 768px) and (max-width: 991px) {
   .site-nav ul {
     margin-left: 0;
+    background-color: #fff;
   }
 }
 @media (max-width: 767px) {
   .site-nav ul {
     margin-left: 0;
+    background-color: #fff;
   }
 }
 .site-nav-toggle {
@@ -2824,20 +2818,11 @@ hr {
     text-align: center;
   }
 }
-.posts-expand .post-eof {
-  display: none;
-}
 .posts-expand .post {
   margin-top: 30px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #f2f2f2;
 }
 .posts-expand .post:first-child {
   margin-top: 0;
-}
-.posts-expand .post:last-child {
-  padding-bottom: 0;
-  border: none;
 }
 .posts-expand .post-meta {
   margin-top: 5px;
@@ -2932,16 +2917,21 @@ hr {
   }
 }
 #main {
-  margin-left: 30%;
+  position: fixed;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  top: 0;
+  padding-left: 30%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   #main {
-    margin-left: auto !important;
+    padding-left: auto !important;
   }
 }
 @media (max-width: 767px) {
   #main {
-    margin-left: auto !important;
+    padding-left: auto !important;
   }
 }
 .container .main-inner {
