@@ -156,7 +156,7 @@ $(document).ready(function() {
           //     }
           //   }
           // );
-          NexT.utils.isDesktop() && $('#main').velocity('stop').velocity({'padding-left': '30%'});
+          NexT.utils.isDesktop() && $('#main').velocity('stop').velocity({'margin-left': '30%'});
           NexT.utils.isDesktop() && $('#header').velocity('stop').velocity({width: '70%'});
         },
         complete: function() {
@@ -177,7 +177,7 @@ $(document).ready(function() {
         display : 'none',
         duration: SIDEBAR_DISPLAY_DURATION,
         begin   : function() {
-          NexT.utils.isDesktop() && $('#main').velocity('stop').velocity({'padding-left': '0'});
+          NexT.utils.isDesktop() && $('#main').velocity('stop').velocity({'margin-left': '0'});
           NexT.utils.isDesktop() && $('#header').velocity('stop').velocity({width: '100%'});
         },
         complete: function() {

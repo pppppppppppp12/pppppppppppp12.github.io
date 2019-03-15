@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   // Write position in cookie
   var timeout;
-  $(window).on('scroll', function() {
+  $('.main-inner').on('scroll', function() {
     clearTimeout(timeout);
     timeout = setTimeout(function() {
       Cookies.set('scroll-cookie', $(window).scrollTop() + '|' + rpath, { expires: 365, path: '' });

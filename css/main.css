@@ -1386,6 +1386,9 @@ pre .javascript .function {
 .posts-expand .post-body h6:hover .header-anchor {
   visibility: visible;
 }
+.posts-expand .post-body ul {
+  margin: 20px 0;
+}
 .posts-expand .post-body ul > li {
   list-style: inherit;
 }
@@ -1414,7 +1417,6 @@ pre .javascript .function {
 }
 .posts-collapse {
   position: relative;
-  z-index: 1010;
   margin-left: 0;
 }
 .posts-collapse::after {
@@ -1434,7 +1436,7 @@ pre .javascript .function {
 }
 .posts-collapse .collection-title {
   position: relative;
-  margin: 60px 0;
+  margin: 30px 0;
 }
 .posts-collapse .collection-title h1,
 .posts-collapse .collection-title h2 {
@@ -1454,9 +1456,6 @@ pre .javascript .function {
   height: 8px;
   background: #bbb;
   border-radius: 50%;
-}
-.posts-collapse .post {
-  margin: 30px 0;
 }
 .posts-collapse .post-header {
   position: relative;
@@ -1501,6 +1500,7 @@ pre .javascript .function {
   font-size: 16px;
   font-weight: normal;
   line-height: inherit;
+  margin: 15px 15px 15px 60px;
 }
 .posts-collapse .post-title::after {
   margin-left: 3px;
@@ -2588,6 +2588,8 @@ hr {
   height: 60px;
   border-bottom: 1px solid #f2f2f2;
   box-sizing: border-box;
+  background-color: #fff;
+  border-left: 1px solid #f2f2f2;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -2917,30 +2919,31 @@ hr {
   }
 }
 #main {
-  position: fixed;
   display: block;
-  width: 100%;
-  box-sizing: border-box;
   top: 0;
-  padding-left: 30%;
+  margin-left: 30%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   #main {
-    padding-left: auto !important;
+    margin-left: auto !important;
   }
 }
 @media (max-width: 767px) {
   #main {
-    padding-left: auto !important;
+    margin-left: auto !important;
   }
+}
+#main .page-number:first-child {
+  margin-left: -10px;
 }
 .container .main-inner {
   box-sizing: border-box;
   padding: 30px;
   margin-left: 0;
   margin-top: 0;
-  padding-top: 70px;
   width: 100%;
+  overflow: auto;
+  padding-top: 70px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .container .main-inner {
@@ -2981,6 +2984,7 @@ hr {
   position: absolute;
   bottom: 0;
   width: 100%;
+  left: 0;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .footer {

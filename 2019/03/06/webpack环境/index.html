@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.0.0',
+    sidebar: {"position":"left","width":"30%","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言基于vue-cli3搭建基础的项目架构，针对不同的环境进行构建配置：本地环境，测试环境，线上环境。下面是对不同环境的一些配置和依赖工具的说明。 本地环境命令1234// vue-cli升级到2.9.1后，webpack升级到3.6.0，改成使用webpack.dev.conf.js配置// node build/dev-server.jscnpm run devwebpack-dev-serv">
+<meta name="keywords" content="vue,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue+webpack环境构建及依赖插件">
+<meta property="og:url" content="http://pppppppppppp12.github.io/2019/03/06/webpack环境/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="前言基于vue-cli3搭建基础的项目架构，针对不同的环境进行构建配置：本地环境，测试环境，线上环境。下面是对不同环境的一些配置和依赖工具的说明。 本地环境命令1234// vue-cli升级到2.9.1后，webpack升级到3.6.0，改成使用webpack.dev.conf.js配置// node build/dev-server.jscnpm run devwebpack-dev-serv">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-07T06:28:59.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue+webpack环境构建及依赖插件">
+<meta name="twitter:description" content="前言基于vue-cli3搭建基础的项目架构，针对不同的环境进行构建配置：本地环境，测试环境，线上环境。下面是对不同环境的一些配置和依赖工具的说明。 本地环境命令1234// vue-cli升级到2.9.1后，webpack升级到3.6.0，改成使用webpack.dev.conf.js配置// node build/dev-server.jscnpm run devwebpack-dev-serv">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pppppppppppp12.github.io/2019/03/06/webpack环境/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>vue+webpack环境构建及依赖插件 | Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+
+    
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+
+    
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+
+    
+
+    <a href="/archives/" rel="section">日志</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+
+    
+
+    <a href="/categories/" rel="section">分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+
+    
+
+    <a href="/tags/" rel="section">标签</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/03/06/webpack环境/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pp">
+      <meta itemprop="description" content="blog for pppppppppppp12.">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue+webpack环境构建及依赖插件
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-06 17:34:53" itemprop="dateCreated datePublished" datetime="2019-03-06T17:34:53+08:00">2019-03-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <time title="修改时间：2019-03-07 14:28:59" itemprop="dateModified" datetime="2019-03-07T14:28:59+08:00">2019-03-07</time>
+              
+            
+          </span>
+
+          
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-tag"></i>
+              </span>
+              
+                <a href="/tags/vue/" rel="tag">vue</a>
+              
+                <a href="/tags/webpack/" rel="tag">webpack</a>
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于vue-cli3搭建基础的项目架构，针对不同的环境进行构建配置：本地环境，测试环境，线上环境。下面是对不同环境的一些配置和依赖工具的说明。</p>
+<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// vue-cli升级到<span class="number">2</span>.<span class="number">9</span>.<span class="number">1</span>后，webpack升级到<span class="number">3</span>.<span class="number">6</span>.<span class="number">0</span>，改成使用webpack.dev.conf.js配置</span><br><span class="line">// node build/dev-server.js</span><br><span class="line">cnpm run dev</span><br><span class="line">webpack-dev-server --inline --progress --config build/webpack.dev.conf.js</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li><p>webpack-dev-server</p>
+<ul>
+<li>hot 开启热更新</li>
+<li>proxyTable 配置接口地址代理，解决接口跨域问题</li>
+</ul>
+</li>
+<li><p>webpack.dev.conf.js</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack服务器配置</span></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    clientLogLevel: <span class="string">'warning'</span>, <span class="comment">// 消息类型 none error warning info</span></span><br><span class="line">    historyApiFallback: &#123; <span class="comment">// 404响应，替代为index.hmtl</span></span><br><span class="line">      rewrites: [</span><br><span class="line">        &#123; <span class="attr">from</span>: <span class="regexp">/.*/</span>, <span class="attr">to</span>: path.posix.join(config.dev.assetsPublicPath, <span class="string">'index.html'</span>) &#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">    hot: <span class="literal">true</span>, <span class="comment">// 热更新开启</span></span><br><span class="line">    contentBase: <span class="literal">false</span>, <span class="comment">// since we use CopyWebpackPlugin.</span></span><br><span class="line">    compress: <span class="literal">true</span> <span class="comment">// 启用gzip压缩</span></span><br><span class="line">    host: HOST || config.dev.host,</span><br><span class="line">    port: PORT || config.dev.port,</span><br><span class="line">    open: config.dev.autoOpenBrowser, <span class="comment">// true 是否自动打开浏览器</span></span><br><span class="line">    overlay: config.dev.errorOverlay <span class="comment">// true 编译错误是是否全屏覆盖</span></span><br><span class="line">    publicPath: config.dev.assetsPublicPath, <span class="comment">// '/'</span></span><br><span class="line">    proxy: config.dev.proxyTable, <span class="comment">// 接口请求代理到后端服务器地址</span></span><br><span class="line">    quiet: <span class="literal">true</span>, <span class="comment">// necessary for FriendlyErrorsPlugin</span></span><br><span class="line">    watchOptions: &#123; <span class="comment">// 获取文件更新通知</span></span><br><span class="line">      poll: config.dev.poll, <span class="comment">// false 是否使用轮询 </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<ul>
+<li>config/index.js</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'http://localhost:8080/auth' ==&gt; 'http://localhost:8889/auth'</span></span><br><span class="line">proxyTable: &#123;</span><br><span class="line">    <span class="string">'/auth'</span>:&#123;</span><br><span class="line">        target: <span class="string">'http://localhost:8889'</span>, <span class="comment">// 目标接口域名</span></span><br><span class="line">        changeOrigin: <span class="literal">true</span> <span class="comment">// 是否跨域</span></span><br><span class="line">     &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm run build_test</span><br><span class="line">node build/build-test.js</span><br></pre></td></tr></table></figure>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>config/index.js</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">    <span class="comment">// Template for index.html</span></span><br><span class="line">    index: path.resolve(__dirname, <span class="string">'../dist/index.html'</span>),</span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    assetsRoot: path.resolve(__dirname, <span class="string">'../dist'</span>), <span class="comment">// 输出目录</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Source Maps</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    productionSourceMap: <span class="literal">false</span>,</span><br><span class="line">    devtool: <span class="string">'#source-map'</span>,</span><br><span class="line">    cssSourceMap: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// 压缩</span></span><br><span class="line">    productionGzip: <span class="literal">false</span>,</span><br><span class="line">    productionGzipExtensions: [<span class="string">'js'</span>, <span class="string">'css'</span>],</span><br><span class="line">    bundleAnalyzerReport: process.env.npm_config_report,</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="正式环境"><a href="#正式环境" class="headerlink" title="正式环境"></a>正式环境</h2><h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm run build</span><br><span class="line">node build/build.js</span><br></pre></td></tr></table></figure>
+<h3 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>config/index.js map选项设置为false</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">productionSourceMap: <span class="literal">false</span>,</span><br><span class="line">devtool: <span class="string">'#source-map'</span>,</span><br><span class="line">cssSourceMap: <span class="literal">false</span>,</span><br></pre></td></tr></table></figure>
+<h2 id="koa后端"><a href="#koa后端" class="headerlink" title="koa后端"></a>koa后端</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cnpm run server</span><br><span class="line">node app.js</span><br><span class="line">cnpm run server_watch // 监听文件更新，自动重启应用</span><br><span class="line">nodemon app.js</span><br></pre></td></tr></table></figure>
+<h2 id="通用工具"><a href="#通用工具" class="headerlink" title="通用工具"></a>通用工具</h2><h3 id="check-versions"><a href="#check-versions" class="headerlink" title="check-versions"></a>check-versions</h3><ul>
+<li>检测node和npm版本</li>
+<li><p>版本配置，package.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"engines"</span>: &#123;</span><br><span class="line">        <span class="attr">"node"</span>: <span class="string">"&gt;= 7.6.0"</span>,</span><br><span class="line">        <span class="attr">"npm"</span>: <span class="string">"&gt;= 3.0.0"</span></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>依赖模块</p>
+<ul>
+<li><code>chalk</code> 控制台高亮</li>
+<li><code>semver</code> 判断版本号</li>
+<li><code>shelljs</code> 执行Unix命令</li>
+<li>child_process 新建子进程，执行命令</li>
+</ul>
+</li>
+</ul>
+<h3 id="环境参数配置"><a href="#环境参数配置" class="headerlink" title="环境参数配置"></a>环境参数配置</h3><ul>
+<li>依赖模块<ul>
+<li><code>webpack-merge</code>拆分与合并配置对象</li>
+<li>webpack.DefinePlugin({‘process.env’: config.build.env}) 设置环境参数</li>
+<li>devtool 开发工具配置，代码调试定位，”cheap-module-eval-source-map” 调试工具</li>
+<li><code>compression-webpack-plugin</code> 正式环境压缩</li>
+</ul>
+</li>
+</ul>
+<h3 id="浏览器兼容性"><a href="#浏览器兼容性" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h3><ul>
+<li><p>浏览器兼容性版本配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"browserslist"</span>: [</span><br><span class="line">        <span class="string">"&gt; 1%"</span>,</span><br><span class="line">        <span class="string">"last 2 versions"</span>,</span><br><span class="line">        <span class="string">"not ie &lt;= 8"</span></span><br><span class="line">      ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>依赖模块</p>
+<ul>
+<li>Babel/preset-env 兼容js特性</li>
+<li>postcss 添加浏览器前缀</li>
+<li>postcss-loader，配合使用Autoprefixer css浏览器前缀</li>
+</ul>
+</li>
+</ul>
+<h3 id="html和静态资源"><a href="#html和静态资源" class="headerlink" title="html和静态资源"></a>html和静态资源</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成html文件，并注入资源链接</span></span><br><span class="line"><span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">  filename: config.build.index,</span><br><span class="line">  template: <span class="string">'index.html'</span>,</span><br><span class="line">  inject: <span class="literal">true</span>,</span><br><span class="line">  favicon: path.join(__dirname, <span class="string">'../'</span>, <span class="string">'src/assets/favicon.ico'</span>),</span><br><span class="line">  minify: &#123;</span><br><span class="line">    removeComments: <span class="literal">true</span>,</span><br><span class="line">    collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">    removeAttributeQuotes: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  chunksSortMode: <span class="string">'dependency'</span></span><br><span class="line">&#125;),</span><br><span class="line"><span class="comment">// 复制静态资源文件</span></span><br><span class="line"><span class="keyword">new</span> CopyWebpackPlugin([</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">from</span>: path.resolve(__dirname, <span class="string">'../static'</span>),</span><br><span class="line">    to: config.build.assetsSubDirectory,</span><br><span class="line">    ignore: [<span class="string">'.*'</span>]</span><br><span class="line">  &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>依赖模块<ul>
+<li>html-webpack-plugin 生成html，注入资源链接</li>
+<li>copy-webpack-plugin 文件复制到构建目录，通常是static下的库文件，对应配置项 <code>assetsSubDirectory: &#39;static&#39;</code></li>
+<li>url-loader 将小的静态资源文件转化为base64，减少http请求数量</li>
+</ul>
+</li>
+</ul>
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分离css文件</span></span><br><span class="line"><span class="keyword">new</span> ExtractTextPlugin(&#123;</span><br><span class="line">  filename: utils.assetsPath(<span class="string">'css/[name].[contenthash].css'</span>)</span><br><span class="line">&#125;),</span><br><span class="line"><span class="comment">// 压缩css文件</span></span><br><span class="line"><span class="keyword">new</span> OptimizeCSSPlugin(&#123;</span><br><span class="line">  cssProcessorOptions: config.build.productionSourceMap</span><br><span class="line">    ? &#123; <span class="attr">safe</span>: <span class="literal">true</span>, <span class="attr">map</span>: &#123; <span class="attr">inline</span>: <span class="literal">false</span> &#125; &#125;</span><br><span class="line">    : &#123; <span class="attr">safe</span>: <span class="literal">true</span> &#125;</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+<ul>
+<li>依赖模块<ul>
+<li>vue-loader</li>
+<li>css-loader </li>
+<li>extract-text-webpack-plugin 分离css文件</li>
+<li>optimize-css-assets-webpack-plugin 压缩css文件</li>
+<li>vue-style-loader</li>
+<li>less 预处理器</li>
+<li>less-loader</li>
+</ul>
+</li>
+</ul>
+<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 压缩js文件</span></span><br><span class="line"><span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(&#123;</span><br><span class="line">  compress: &#123;</span><br><span class="line">    warnings: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  sourceMap: <span class="literal">false</span></span><br><span class="line">&#125;),</span><br><span class="line"><span class="comment">// 提取公共代码，公共模块打包到vendor</span></span><br><span class="line"><span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">  name: <span class="string">'vendor'</span>,</span><br><span class="line">  minChunks: <span class="function"><span class="keyword">function</span> (<span class="params">module, count</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// any required modules inside node_modules are extracted to vendor</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="built_in">module</span>.resource &amp;&amp;</span><br><span class="line">      /\.js$/.test(<span class="built_in">module</span>.resource) &amp;&amp;</span><br><span class="line">      <span class="built_in">module</span>.resource.indexOf(</span><br><span class="line">        path.join(__dirname, <span class="string">'../node_modules'</span>)</span><br><span class="line">      ) === <span class="number">0</span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;),</span><br><span class="line"><span class="comment">// 提取公共代码，将业务代码打包到manifest</span></span><br><span class="line"><span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">  name: <span class="string">'manifest'</span>,</span><br><span class="line">  chunks: [<span class="string">'vendor'</span>]</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+<p>依赖模块</p>
+<ul>
+<li>webpack.optimize.UglifyJsPlugin </li>
+<li>webpack.optimize.CommonsChunkPlugin</li>
+</ul>
+<h3 id="vue-loader"><a href="#vue-loader" class="headerlink" title="vue-loader"></a>vue-loader</h3><ul>
+<li><script><ul>
+<li><code>babel-loader</code> -&gt; 支持es6，import、export</li>
+<li>require()</li>
+</ul>
+</li>
+<li><style><ul>
+<li><code>style-loader</code></li>
+<li>作用域 scoped、module</li>
+<li>支持与处理器 <code>less-loader</code></li>
+<li>postcss、autoprefixer 浏览器兼容前缀</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://cli.vuejs.org/zh/guide/">api</a></p>
+</script></li></ul>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/25/vue-性能/" rel="next" title="vue性能优化与代码风格">
+                <i class="fa fa-chevron-left"></i> vue性能优化与代码风格
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/11/mvc/" rel="prev" title="mvc模式与数据绑定的方式">
+                mvc模式与数据绑定的方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.png" alt="pp">
+            
+              <p class="site-author-name" itemprop="name">pp</p>
+              <p class="site-description motion-element" itemprop="description">blog for pppppppppppp12.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/pppppppppppp12" title="GitHub &rarr; https://github.com/pppppppppppp12" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          <!-- CloudCalendar -->
+          <div class="widget-wrap" style="width: 230px;margin-left: auto;margin-right: auto; opacity: 0.97;">
+            <div class="widget" id="CloudCalendar"></div>
+          </div>
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地环境"><span class="nav-number">2.</span> <span class="nav-text">本地环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">2.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试环境"><span class="nav-number">3.</span> <span class="nav-text">测试环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令-1"><span class="nav-number">3.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-1"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正式环境"><span class="nav-number">4.</span> <span class="nav-text">正式环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令-2"><span class="nav-number">4.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-2"><span class="nav-number">4.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#koa后端"><span class="nav-number">5.</span> <span class="nav-text">koa后端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用工具"><span class="nav-number">6.</span> <span class="nav-text">通用工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#check-versions"><span class="nav-number">6.1.</span> <span class="nav-text">check-versions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境参数配置"><span class="nav-number">6.2.</span> <span class="nav-text">环境参数配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器兼容性"><span class="nav-number">6.3.</span> <span class="nav-text">浏览器兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html和静态资源"><span class="nav-number">6.4.</span> <span class="nav-text">html和静态资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css"><span class="nav-number">6.5.</span> <span class="nav-text">css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js"><span class="nav-number">6.6.</span> <span class="nav-text">js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue-loader"><span class="nav-number">6.7.</span> <span class="nav-text">vue-loader</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+      
+      <footer id="footer" class="footer">
+        <div class="footer-inner">
+          <div class="copyright">© <span itemprop="copyrightYear">2019</span>
+            <span class="with-love" id="animate">
+              <i class="fa fa-user"></i>
+            </span>
+            <span class="author" itemprop="copyrightHolder">pp</span>
+          </div>
+          <div class="powered-by">
+          <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+          <span class="post-meta-divider">|</span>
+          <div class="theme-info"><a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.0.0</div>
+          <span class="post-meta-divider">|</span>
+          <div class="theme-info">Anatole</div>
+        </div>
+      </footer>
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $(".site-nav")
+        .after('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $(".site-nav")
+        .after('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- calendar widget -->
+
+
+
+</body>
+</html>
