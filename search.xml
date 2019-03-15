@@ -172,8 +172,8 @@
     <url>%2F2019%2F02%2F10%2Furi%E4%B8%8Eurl%E5%8C%BA%E5%88%AB%2F</url>
     <content type="text"><![CDATA[encodeURI() 用于整个 URI 的编码，不会对本身属于 URI 的特殊字符进行编码，如冒号、正斜杠、问号和井号； 不会进行编码的字符：ASCII字母、数字、~!@#$&amp;*()=:/,;?+’ 对应的解码函数 decodeURI() 类似escape()，但escape只针对字符串编码 encodeURIComponent() 用于对 URI 中的某一部分进行编码，会对它发现的任何非标准字符进行编码。 不会进行编码的字符：ASCII字母、数字、~!*()’ 对应的解码函数 decodeURIComponent() uri与url uri 统一资源标识符,是一个用于标识某一互联网资源名称的字符串 url 统一资源定位，是互联网上标准资源的地址]]></content>
       <tags>
-        <tag>javascript</tag>
         <tag>web</tag>
+        <tag>javascript</tag>
       </tags>
   </entry>
 </search>
