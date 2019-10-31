@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[git hooks无法pre-commit的问题]]></title>
+    <url>%2F2019%2F10%2F30%2Fgit-hooks%E6%97%A0%E6%B3%95pre-commit%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[问题新构建的antd-pro项目，hooks无法执行pre-commit。在npm run lint-staged检测报错的情况下，git commit没有执行pre-commit钩子，直接提交成功。 原因husky要求git版本在2.13.0以上，git版本过低会使husky设置git hooks失败，导致commit跳过了pre-commit，下图为报错信息： husky安装时设置git hooks失败 解决升级git版本，重新执行cnpm install husky。 资料：mac下git升级到最新版本antd-pro issues mark]]></content>
+      <tags>
+        <tag>antd</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[mvc模式与数据绑定的方式]]></title>
     <url>%2F2019%2F03%2F11%2Fmvc%2F</url>
     <content type="text"><![CDATA[前言页面渲染方式： 服务端渲染，如smarty后端模板 利于seo 渲染速度更快 浏览器端渲染，前端模板 减少维护成本 提高效率，前后端分离的合作模式 模板引擎工作原理： 模板解析 / 编译 parse / compile 数据渲染 render String-based，基于string的parse和compile过程 本质上是字符串拼接的形式，遍历html字符串 基于正则表达式查找出模板 { { } } es6模板字符串 替换模型数据，实现视图渲染，依赖于innerHTML 典型库 art-template mustache.js doT Dom-based，基于dom的link或compile过程 遍历dom树节点属性和子节点，渲染render 提取dom中的{ { } }关键词，替换数据模型 基于mvc结构：模板视图，数据模型，引擎函数作为控制器实现数据与视图的绑定 数据模型更新 -&gt; 视图更新：双向绑定。局部渲染更新 典型库 Angular 脏检测，在特定事件下触发视图刷新 React 虚拟dom算法检查dom变化 Vue2 Getter/Setter机制与虚拟dom avalonjs 数据双向绑定的实现 监听vue实例中data属性，遍历此对象的属性，并使用Object.defineProperty 把这些属性转为getter/setter 1234567891011121314151617181920var obj = &#123; a: 1&#125;// a,b属性值互相依赖，更容易监听对象的变化Object.defineProperty(obj, "b", &#123; // 对象，属性，属性描述符 get: function () &#123; return this.a + 1 &#125;, set: function (value) &#123; this.a = value / 2 &#125;&#125;)// 更新 obj.aobj.a = 3console.log(obj.a) // 3console.log(obj.b) // 4// 更新 obj.bobj.b = 10console.log(obj.a) // 5console.log(obj.b) // 6 数据描述符 可写 / 不可写 属性描述符 存取描述符 getter / setter Living templating，基于string的parse和基于dom的compile过程 htmlbar ractivejs regularjs]]></content>
@@ -172,8 +180,8 @@
     <url>%2F2019%2F02%2F10%2Furi%E4%B8%8Eurl%E5%8C%BA%E5%88%AB%2F</url>
     <content type="text"><![CDATA[encodeURI() 用于整个 URI 的编码，不会对本身属于 URI 的特殊字符进行编码，如冒号、正斜杠、问号和井号； 不会进行编码的字符：ASCII字母、数字、~!@#$&amp;*()=:/,;?+’ 对应的解码函数 decodeURI() 类似escape()，但escape只针对字符串编码 encodeURIComponent() 用于对 URI 中的某一部分进行编码，会对它发现的任何非标准字符进行编码。 不会进行编码的字符：ASCII字母、数字、~!*()’ 对应的解码函数 decodeURIComponent() uri与url uri 统一资源标识符,是一个用于标识某一互联网资源名称的字符串 url 统一资源定位，是互联网上标准资源的地址]]></content>
       <tags>
-        <tag>web</tag>
         <tag>javascript</tag>
+        <tag>web</tag>
       </tags>
   </entry>
 </search>

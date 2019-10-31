@@ -15,7 +15,7 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -163,7 +163,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -174,7 +174,7 @@
   page-home">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -352,20 +352,182 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/10/30/git-hooks无法pre-commit的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pp">
+      <meta itemprop="description" content="blog for pppppppppppp12.">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/30/git-hooks无法pre-commit的问题/" class="post-title-link" itemprop="url">git hooks无法pre-commit的问题</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-30 17:46:45 / 修改时间：17:52:27" itemprop="dateCreated datePublished" datetime="2019-10-30T17:46:45+08:00">2019-10-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-tag"></i>
+              </span>
+              
+                <a href="/tags/antd/" rel="tag">antd</a>
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              问题新构建的antd-pro项目，hooks无法执行pre-commit。在npm run lint-staged检测报错的情况下，git commit没有执行pre-commit钩子，直接提交成功。
+
+原因husky要求git版本在2.13.0以上，git版本过低会使husky设置git hooks失败，导致commit跳过了pre-commit，下图为报错信息：
+husky安装时设置git hooks失败
+
+解决升级git版本，重新执行cnpm install husky。
+资料：mac下g
+              ...
+            </p>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/03/11/mvc/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pp">
       <meta itemprop="description" content="blog for pppppppppppp12.">
       <meta itemprop="image" content="/images/logo.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Blog">
     </span>
 
@@ -542,20 +704,20 @@ es6模板字符串
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/03/06/webpack环境/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pp">
       <meta itemprop="description" content="blog for pppppppppppp12.">
       <meta itemprop="image" content="/images/logo.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Blog">
     </span>
 
@@ -603,7 +765,7 @@ es6模板字符串
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <time title="修改时间：2019-03-07 14:28:59" itemprop="dateModified" datetime="2019-03-07T14:28:59+08:00">2019-03-07</time>
+                <time title="修改时间：2019-03-07 14:28:58" itemprop="dateModified" datetime="2019-03-07T14:28:58+08:00">2019-03-07</time>
               
             
           </span>
@@ -710,20 +872,20 @@ es6模板字符串
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/02/25/vue-性能/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pp">
       <meta itemprop="description" content="blog for pppppppppppp12.">
       <meta itemprop="image" content="/images/logo.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Blog">
     </span>
 
@@ -884,20 +1046,20 @@ v-if和v-for避免用在同一个元素上，减少遍历运算成本和渲染�
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/02/25/vuex/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pp">
       <meta itemprop="description" content="blog for pppppppppppp12.">
       <meta itemprop="image" content="/images/logo.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Blog">
     </span>
 
@@ -945,7 +1107,7 @@ v-if和v-for避免用在同一个元素上，减少遍历运算成本和渲染�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <time title="修改时间：2019-03-11 11:17:09" itemprop="dateModified" datetime="2019-03-11T11:17:09+08:00">2019-03-11</time>
+                <time title="修改时间：2019-03-11 11:17:08" itemprop="dateModified" datetime="2019-03-11T11:17:08+08:00">2019-03-11</time>
               
             
           </span>
@@ -1048,176 +1210,6 @@ var store = &#123;    debug: true,    state: &#123;         message: 'Hello!'   
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/02/17/vue-基础/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="pp">
-      <meta itemprop="description" content="blog for pppppppppppp12.">
-      <meta itemprop="image" content="/images/logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/17/vue-基础/" class="post-title-link" itemprop="url">vue基础指令与组件通信</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-17 16:01:37" itemprop="dateCreated datePublished" datetime="2019-02-17T16:01:37+08:00">2019-02-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <time title="修改时间：2019-03-19 14:50:16" itemprop="dateModified" datetime="2019-03-19T14:50:16+08:00">2019-03-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-tag"></i>
-              </span>
-              
-                <a href="/tags/vue/" rel="tag">vue</a>
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              基础语法vue应用结构
-根实例
-&lt;div id="app"&gt;&lt;/div&gt;new Vue(&#123; el: '#app'&#125;)
-
-组件vue实例
-&lt;div id="app"&gt;    &lt;btn-component&gt;&lt;/btn-component&gt;&lt;/div&gt;Vue.component('btn-component', &#123;    data: function () &#123;        return: 
-              ...
-            </p>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1252,7 +1244,7 @@ var store = &#123;    debug: true,    state: &#123;         message: 'Hello!'   
 
       <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/images/logo.png" alt="pp">
             
@@ -1267,7 +1259,7 @@ var store = &#123;    debug: true,    state: &#123;         message: 'Hello!'   
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1300,7 +1292,9 @@ var store = &#123;    debug: true,    state: &#123;         message: 'Hello!'   
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

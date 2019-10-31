@@ -15,7 +15,7 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://pppppppppppp12.github.io/2019/02/16/react-native-运行/error4.png">
 <meta property="og:image" content="http://pppppppppppp12.github.io/2019/02/16/react-native-运行/error5.png">
 <meta property="og:image" content="http://pppppppppppp12.github.io/2019/02/16/react-native-运行/error6.png">
-<meta property="og:updated_time" content="2019-03-15T11:03:04.651Z">
+<meta property="og:updated_time" content="2019-03-15T11:03:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native运行步骤及记录一些坑">
 <meta name="twitter:description" content="build.gradle 配置android/app/build.gradle 12345678910111213141516android &amp;#123;  // 对应版本  compileSdkVersion 24  buildToolsVersion &quot;24.0.2&quot;   // D:\Windows\Android\sdk\build-tools // 查看版本  defaultConfig">
@@ -173,7 +173,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -183,7 +183,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -361,20 +361,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/02/16/react-native-运行/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pp">
       <meta itemprop="description" content="blog for pppppppppppp12.">
       <meta itemprop="image" content="/images/logo.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Blog">
     </span>
 
@@ -492,23 +492,23 @@
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb devices // 打印设备列表，确保设备已连接</span><br><span class="line">npm install // 添加包含原生代码的库</span><br><span class="line">react-native link // 根据package.json中的依赖链接原生库</span><br><span class="line">react-native run-android // 运行项目</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="运行中遇到的坑"><a href="#运行中遇到的坑" class="headerlink" title="运行中遇到的坑"></a>运行中遇到的坑</h2><h3 id="版本报错：build-gradle对应版本-依赖库中的最低版本依赖"><a href="#版本报错：build-gradle对应版本-依赖库中的最低版本依赖" class="headerlink" title="版本报错：build_gradle对应版本 / 依赖库中的最低版本依赖"></a>版本报错：build_gradle对应版本 / 依赖库中的最低版本依赖</h3><p>  <img src="/2019/02/16/react-native-运行/error1.png" alt=""></p>
+<h2 id="运行中遇到的坑"><a href="#运行中遇到的坑" class="headerlink" title="运行中遇到的坑"></a>运行中遇到的坑</h2><h3 id="版本报错：build-gradle对应版本-依赖库中的最低版本依赖"><a href="#版本报错：build-gradle对应版本-依赖库中的最低版本依赖" class="headerlink" title="版本报错：build_gradle对应版本 / 依赖库中的最低版本依赖"></a>版本报错：build_gradle对应版本 / 依赖库中的最低版本依赖</h3><p>  <img src="/2019/02/16/react-native-运行/error1.png" alt></p>
 <p>  解决：<br>  升级到依赖库中的最低版本，并确保sdk版本已安装</p>
 <h3 id="连接设备报错"><a href="#连接设备报错" class="headerlink" title="连接设备报错"></a>连接设备报错</h3><h4 id="could-not-get-BatchedBridge"><a href="#could-not-get-BatchedBridge" class="headerlink" title="could not get BatchedBridge"></a>could not get BatchedBridge</h4>  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">could <span class="keyword">not</span> get BatchedBridge, make sure your bundle is packaged correctly</span><br></pre></td></tr></table></figure>
 <p>  解决：</p>
   <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb devices // 输出设备列表，模拟器</span><br><span class="line">adb reverse tcp:<span class="number">8081</span> tcp:<span class="number">8081</span></span><br></pre></td></tr></table></figure>
 <p>  真机设置<br>  dev setting -&gt; debug server host for device -&gt; localhost:8081</p>
-<p>  <img src="/2019/02/16/react-native-运行/setting.png" alt=""></p>
+<p>  <img src="/2019/02/16/react-native-运行/setting.png" alt></p>
 <h4 id="fbBatchedBridge-is-undefined"><a href="#fbBatchedBridge-is-undefined" class="headerlink" title="fbBatchedBridge is undefined"></a>fbBatchedBridge is undefined</h4>  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">failed to <span class="keyword">call</span> funciton, __fbBatchedBridge is undefined</span><br></pre></td></tr></table></figure>
 <p>  解决：<br>  保证电脑和app启动在同一个局域网下，指定本机ip地址和端口号</p>
   <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 项目根目录，--host为本机ip地址</span><br><span class="line">react-native <span class="built_in">start</span> --host <span class="number">10</span>.<span class="number">1</span>.<span class="number">102</span>.<span class="number">80</span> --port <span class="number">8081</span></span><br><span class="line"></span><br><span class="line">// 另一个控制台</span><br><span class="line">react-native run-android</span><br></pre></td></tr></table></figure>
 <h3 id="模块安装报错：can’t-delete-create-path"><a href="#模块安装报错：can’t-delete-create-path" class="headerlink" title="模块安装报错：can’t delete / create path"></a>模块安装报错：can’t delete / create path</h3>  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Error: <span class="title">Cannot</span> <span class="title">create</span> <span class="title">directory</span> <span class="title">E</span>:\<span class="title">react</span>-<span class="title">native</span>-<span class="title">JueJinClient</span>-<span class="title">master1</span>\<span class="title">android</span>\<span class="title">app</span>\<span class="title">build</span>\<span class="title">intermediates</span>\<span class="title">merged.dir</span>\<span class="title">values</span></span></span><br></pre></td></tr></table></figure>
 <p>  解决：</p>
   <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> android &amp;&amp; gradlew clean</span><br></pre></td></tr></table></figure>
-<h3 id="依赖库版本报错：min-sdk-version-gt-26"><a href="#依赖库版本报错：min-sdk-version-gt-26" class="headerlink" title="依赖库版本报错：min-sdk-version&gt;=26"></a>依赖库版本报错：min-sdk-version&gt;=26</h3><p>  <img src="/2019/02/16/react-native-运行/error2.png" alt=""></p>
+<h3 id="依赖库版本报错：min-sdk-version-gt-26"><a href="#依赖库版本报错：min-sdk-version-gt-26" class="headerlink" title="依赖库版本报错：min-sdk-version&gt;=26"></a>依赖库版本报错：min-sdk-version&gt;=26</h3><p>  <img src="/2019/02/16/react-native-运行/error2.png" alt></p>
 <p>  解决：</p>
-<p>  <img src="/2019/02/16/react-native-运行/error3.png" alt=""><br>  <a href="https://github.com/airbnb/lottie-react-native/issues/345" target="_blank" rel="noopener">lottie-react-native</a></p>
-<h3 id="应用方法数报错"><a href="#应用方法数报错" class="headerlink" title="应用方法数报错"></a>应用方法数报错</h3><p>  <img src="/2019/02/16/react-native-运行/error4.png" alt=""></p>
+<p>  <img src="/2019/02/16/react-native-运行/error3.png" alt><br>  <a href="https://github.com/airbnb/lottie-react-native/issues/345" target="_blank" rel="noopener">lottie-react-native</a></p>
+<h3 id="应用方法数报错"><a href="#应用方法数报错" class="headerlink" title="应用方法数报错"></a>应用方法数报错</h3><p>  <img src="/2019/02/16/react-native-运行/error4.png" alt></p>
 <ol>
 <li><p>build.gradle</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">        defaultConfig &#123;</span><br><span class="line">          multiDexEnabled = <span class="keyword">true</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">        compile <span class="string">'com.android.support:multidex:1.0.1'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -526,7 +526,7 @@
 <li><p>相关库是否需要加上混淆的规则 <a href="https://github.com/oney/react-native-webrtc/issues/230" target="_blank" rel="noopener">如在库的github中查找</a></p>
 </li>
 <li><p>用android studio打包，可以查看具体出错的类</p>
-<p><img src="/2019/02/16/react-native-运行/error5.png" alt=""><br><img src="/2019/02/16/react-native-运行/error6.png" alt=""></p>
+<p><img src="/2019/02/16/react-native-运行/error5.png" alt><br><img src="/2019/02/16/react-native-运行/error6.png" alt></p>
 </li>
 <li><p>添加规则</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># react-native-webrtc</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">webrtc</span>.** </span>&#123;*;&#125;</span><br><span class="line">-dontwarn org.webrtc.**</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">chromium</span>.** </span>&#123;*;&#125;</span><br><span class="line">-dontwarn org.chromium.**</span><br></pre></td></tr></table></figure>
@@ -640,7 +640,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/images/logo.png" alt="pp">
             
@@ -655,7 +655,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -688,7 +688,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

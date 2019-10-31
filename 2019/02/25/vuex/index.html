@@ -15,7 +15,7 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="特性共享状态解决以下问题：  多个组件共享状态state，如兄弟组件之间的状态传递 不同组件行为需要更新同一state，但不破坏组件之间的单向数据流  对于简单应用 store模式 集中式状态管理 action统一管理state的更新，更好地记录state的变化和调试  12345678910111213141516171819202122var store = &amp;#123;    debug:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-11T03:17:09.212Z">
+<meta property="og:updated_time" content="2019-03-11T03:17:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue组件之间的共享状态：store模式与vuex状态管理">
 <meta name="twitter:description" content="特性共享状态解决以下问题：  多个组件共享状态state，如兄弟组件之间的状态传递 不同组件行为需要更新同一state，但不破坏组件之间的单向数据流  对于简单应用 store模式 集中式状态管理 action统一管理state的更新，更好地记录state的变化和调试  12345678910111213141516171819202122var store = &amp;#123;    debug:">
@@ -165,7 +165,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -175,7 +175,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -353,20 +353,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pppppppppppp12.github.io/2019/02/25/vuex/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pp">
       <meta itemprop="description" content="blog for pppppppppppp12.">
       <meta itemprop="image" content="/images/logo.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Blog">
     </span>
 
@@ -412,7 +412,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <time title="修改时间：2019-03-11 11:17:09" itemprop="dateModified" datetime="2019-03-11T11:17:09+08:00">2019-03-11</time>
+                <time title="修改时间：2019-03-11 11:17:08" itemprop="dateModified" datetime="2019-03-11T11:17:08+08:00">2019-03-11</time>
               
             
           </span>
@@ -482,7 +482,7 @@
 <li>组件可以在计算属性中获取state<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用</span></span><br><span class="line"><span class="keyword">this</span>.$store.state.module.selectState</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="getter计算属性"><a href="#getter计算属性" class="headerlink" title="getter计算属性"></a>getter计算属性</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">getters: &#123;</span><br><span class="line">    doneTodos: <span class="function"><span class="params">state</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> state.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.done)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 通过方法访问，并传参</span></span><br><span class="line">    getTodoById: <span class="function">(<span class="params">state</span>) =&gt;</span> (id) =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> state.todos.find(<span class="function"><span class="params">todo</span> =&gt;</span> todo.id === id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 引用</span></span><br><span class="line"><span class="keyword">this</span>.$store.getters.doneTodos</span><br><span class="line"> <span class="keyword">this</span>.$store.getters.getTodoById(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="getter计算属性"><a href="#getter计算属性" class="headerlink" title="getter计算属性"></a>getter计算属性</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line">getters: &#123;</span><br><span class="line">    doneTodos: <span class="function"><span class="params">state</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> state.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.done)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 通过方法访问，并传参</span></span><br><span class="line">    getTodoById: <span class="function">(<span class="params">state</span>) =&gt;</span> <span class="function">(<span class="params">id</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> state.todos.find(<span class="function"><span class="params">todo</span> =&gt;</span> todo.id === id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 引用</span></span><br><span class="line"><span class="keyword">this</span>.$store.getters.doneTodos</span><br><span class="line"> <span class="keyword">this</span>.$store.getters.getTodoById(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="mutation"><a href="#mutation" class="headerlink" title="mutation"></a>mutation</h4><ul>
 <li>同步函数</li>
 <li>mutation中变更state</li>
@@ -591,7 +591,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/images/logo.png" alt="pp">
             
@@ -606,7 +606,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -639,7 +639,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
